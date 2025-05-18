@@ -1,0 +1,65 @@
+# Solucion 1, enfocada en un arreglo de 2 punteros, se agregan los caracteres de los strings dentro de un ciclo for
+# con condicionales para evitar que se salgan de sus respectivos rangos
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        w3 = []
+        w1,w2 = 0,0
+
+        for i in range(max(len(word1), len(word2))):
+            if(len(word1) > w1):
+                w3.append(word1[w1])
+                w1 += 1
+            if(len(word2) > w2):
+                w3.append(word2[w2])
+                w2 += 1
+
+        result = ''.join(w3)
+        return result
+
+
+# Solucion 2, mismo enfoque pero en vez de realizar la asignacion dentro del ciclo for se hace a traves de while
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        s = []
+        a, b = 0,0
+        A, B = len(word1), len(word2)
+        word = 1
+
+        while a < A and b < B:
+            if word == 1:
+                s.append(word1[a])
+                a += 1
+                word = 2
+            else: 
+                s.append(word2[b])
+                b += 1
+                word = 1
+        
+        while a < A: 
+            s.append(word1[a])
+            a += 1
+
+        while b < B:
+            s.append(word2[b])
+            b += 1
+
+        return ''.join(s)
+
+# Opcion 3, emplea un enfoque mixto de las 2 soluciones anteriores tomando los mejores aspectos de ambos 
+
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        s = []
+        i, j = 0, 0
+        I, J = len(word1), len(word2)
+
+        while j < J or i < I:
+            if i < I:
+                s.append(word1[i])
+                i += 1
+            
+            if j < J:
+                s.append(word2[j])
+                j += 1
+        
+        return ''.join(s)
